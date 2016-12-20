@@ -1,0 +1,33 @@
+version: "2"
+
+services:
+  web:
+    image: ${DTR_URL}/admin/hello-world-python:${TAG}
+    ports:
+     - "5000"
+    networks:
+      - hello-world
+    labels:
+      - "com.docker.ucp.access.label=${COMPOSE_PROJECT}"
+      - "interlock.hostname=hello-world-${ENVIRONMENT}"
+      - "interlock.domain=${DOMAIN_NAME}"
+    
+
+  redis:
+    image: redis:3.2-alpine
+    command: redis-server --appendonly yes
+    networks:
+      - hello-world
+    volumes:
+      - redis-data:/data
+    labels:
+      - "com.docker.ucp.access.label=${COMPOSE_PROJECT}"
+   
+
+networks:
+  hello-world:
+    
+
+volumes:
+  redis-data:
+    driver: local
