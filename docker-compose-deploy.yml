@@ -4,7 +4,7 @@ services:
   web:
     image: ${DTR_URL}/demodocker/hello-world-python:${TAG}
     ports:
-     - "5000"
+     - "32769+:5000"
     networks:
       - hello-world
     labels:
