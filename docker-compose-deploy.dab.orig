@@ -1,0 +1,35 @@
+{
+  "Services": {
+    "redis": {
+      "Args": [
+        "redis-server",
+        "--appendonly",
+        "yes"
+      ],
+      "Image": "redis@sha256:1ba52ff9dccb4b06e54baf290e0a5d4a6f7f68c64c587704e7f42d8d9b4cace0",
+      "Labels": {
+        "com.docker.ucp.access.label": "helloworlddev"
+      },
+      "Networks": [
+        "hello-world"
+      ]
+    },
+    "web": {
+      "Image": "ddceitdtr.westeurope.cloudapp.azure.com/demodocker/hello-world-python@sha256:d82b411a44cff1d6e4460cf88eaf55ca48c8d8c33a47533dbc19373a95637740",       "Labels": {
+        "com.docker.ucp.access.label": "helloworlddev",
+        "interlock.domain": "westeurope.cloudapp.azure.com",
+        "interlock.hostname": "hello-world-dev"
+      },
+      "Networks": [
+        "hello-world"
+      ],
+      "Ports": [
+        {
+          "Port": 5000,
+          "Protocol": "tcp"
+        }
+      ]
+    }
+  },
+  "Version": "0.1"
+}

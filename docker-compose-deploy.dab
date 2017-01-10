@@ -1,0 +1,35 @@
+{
+  "Services": {
+    "redis": {
+      "Args": [
+        "redis-server",
+        "--appendonly",
+        "yes"
+      ],
+      "Image": "redis:3.2-alpine",
+      "Labels": {
+        "com.docker.ucp.access.label": "${COMPOSE_PROJECT}"
+      },
+      "Networks": [
+        "hello-world"
+      ]
+    },
+    "web": {
+      "Image": "${DTR_URL}/demodocker/hello-world-python:${TAG}",       "Labels": {
+        "com.docker.ucp.access.label": "${COMPOSE_PROJECT}",
+        "interlock.domain": "${DOMAIN_NAME}",
+        "interlock.hostname": "hello-world-${ENVIRONMENT}"
+      },
+      "Networks": [
+        "hello-world"
+      ],
+      "Ports": [
+        {
+          "Port": 5000,
+          "Protocol": "tcp"
+        }
+      ]
+    }
+  },
+  "Version": "0.1"
+}
