@@ -26,6 +26,7 @@ services:
 
 networks:
   hello-world:
+      driver: bridge
     
 
 volumes:
